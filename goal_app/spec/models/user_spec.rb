@@ -10,17 +10,12 @@ RSpec.describe User, type: :model do
   it {should validate_length_of (:password).is_at_least(6)}
 
   describe "#password=" do
-    let (:user1){User.new{
+    let (:user1) {User.new(
       username: "Yuri",
       password: "123456"
-    }}
+    )}
     it "Should set the password for the user" do
-      expect(user1.password)to eq("123456")
+      expect(user1.password).to eq("123456")
     end
   end
-
-
-
-
-
 end
