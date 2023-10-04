@@ -18,35 +18,35 @@ RSpec.describe User, type: :model do
     #   username: "Yuri",
     #   password: "123456"
     # )}  
-    before(:each) do
-      FactoryBot.create(:user)
-    end
+      let(:user){FactoryBot.create(:user)}
     it "Should set the password for the user" do
       expect(user.password).to eq("password")
     end
   end
 
   describe "#is_password?" do
-    before(:each) do
-      FactoryBot.create(:user)
-    end
+      let(:user){FactoryBot.create(:user)}
+    
     it "should return true if the password is correct" do
-      expect{user.is_password?("password").to be(true)}
+      expect(user.is_password?("password")).to be true
+    end
+    context "with an incorrect password" do
+      it "should return false" do
+        expect(user.is_password?("eeeeee")).to be false
+      end
     end
   end
 
   describe "::find_by_credentials" do
-    before(:each) do 
-      FactoryBot.create(:user)
-    end
+      let(:user){FactoryBot.create(:user)}
     context "if the user exists" do
       it "should return the user that matches the credentials" do
-        expect(User.find_by_credentials(user.username, "password").to be(user))
+        expect(User.find_by_credentials(user.username, "password")).to eq user
       end
     end
     context "if the user does not exist" do
       it "should return nil" do
-
+        
       end
     end
   end
